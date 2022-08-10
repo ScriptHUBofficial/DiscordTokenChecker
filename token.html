@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+<head>
+    <title>Token Checker</title>
+</head>
+
+<body>
+
+
+    <style>
+        body {
+            background-image: url('https://get.wallhere.com/photo/selective-coloring-anime-girls-anime-monochrome-simple-background-black-background-2130585.jpg');
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+    </style>
+
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <center>
+            <h1>
+                <font color="white">Token Checker</font>
+            </h1>
+            <div id="title">
+                <font color="white">Discord girin Token</div>
+            <input id="token" type="text" name="token">
+            <button type="submit" name="submit" onclick="submit()">Check</button>
+            <div id="response"></div>
+            By BlacJac | github.com/ScriptHUBofficial
+    </div>
+    <script>
+        function submit() {
+            var input = document.getElementById("token").value;
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', 'https://discordapp.com/api/v9/users/@me/guilds', true);
+            xhr.setRequestHeader('Authorization', `${input}`)
+            xhr.onload = function() {
+                if (xhr.response == '{"message": "401: Unauthorized", "code": 0}') {
+                    document.getElementById("response").innerHTML = "<br />Geçersiz Token"
+                } else {
+                    document.getElementById("response").innerHTML = "<br />Geçerli Token"
+                }
+            }
+            xhr.send();
+
+        }
+    </script>
